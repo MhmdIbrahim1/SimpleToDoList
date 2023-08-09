@@ -1,4 +1,4 @@
-import flet
+import flet as ft
 from flet import (
     Checkbox,
     Column,
@@ -14,7 +14,6 @@ from flet import (
     UserControl,
     colors,
     icons,
-    AlertDialog,
 )
 
 
@@ -88,15 +87,7 @@ class Task(UserControl):
         self.task_status_change(self)
 
     def delete_clicked(self, e):
-        delete_dialog = AlertDialog(
-            title="Confirm Delete",
-            content="Are you sure you want to remove this todo?",
-            actions=[
-                OutlinedButton(text="Cancel", on_click=lambda: setattr(delete_dialog, 'visible', False)),
-                OutlinedButton(text="Delete", on_click=lambda _: self.task_delete(self)),  # Use lambda here
-            ],
-        )
-        delete_dialog.visible = True  # Show the dialog
+        self.task_delete(self)
 
 
 class TodoApp(UserControl):
@@ -197,4 +188,4 @@ def main(page: Page):
     page.add(app)
 
 
-flet.app(target=main)
+ft.app(target=main)
